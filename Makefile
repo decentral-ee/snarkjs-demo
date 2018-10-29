@@ -1,7 +1,7 @@
 CIRCUIT_NAME=multiplier
 CASE=case1
 
-CIRCUIT_DIR=circuits/$(CIRCUIT_NAME)
+CIRCUIT_DIR=demos/$(CIRCUIT_NAME)
 CASE_DIR=$(CIRCUIT_DIR)/samples/$(CASE)
 
 CIRCOM=npx --node-arg "--max-old-space-size=12000" circom
