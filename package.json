@@ -1,0 +1,16 @@
+{
+  "name": "snarkjs-demo",
+  "version": "1.0.0",
+  "description": "snarkjs demo circuits",
+  "main": "index.js",
+  "dependencies": {
+    "circom": "^0.0.19",
+    "snarkjs": "^0.1.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "make test testbad CIRCUIT_NAME=multiplier CASE=case1"
+  },
+  "author": "Miao ZhiCheng <miao@decentral.ee>",
+  "license": "ISC"
+}
