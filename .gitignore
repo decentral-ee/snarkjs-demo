@@ -1,1 +1,7 @@
 node_modules
+circuit.json
+proving_key.json
+verification_key.json
+verifier.sol
+proof.json
+witness.json

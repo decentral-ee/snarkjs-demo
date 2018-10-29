@@ -1,0 +1,24 @@
+What is the balance? 32456
+salt  : b73b4b46e269bb8b004bcead386f81468bbab6f13083cc57dcbe3b
+buffer: b73b4b46e269bb8b004bcead386f81468bbab6f13083cc57dcbe3b000000000000000000000000000000000000000000000000007ec8
+salt in bignumber: 75377115362767675398804261478976631160530926418020745369265946171
+hash in bignumber: 59804956490061966944605624366197118549841129766369488852863629470
+
+To make the zkSNARK proof usable, you need the bank signature (digital or paper) to proof your balance with the following statement similar to:
+
+-------------------------------------------------------------------------------
+As of YYYY-MM-DD, the amount of cash balance the client X has at our bank is
+digested by a hashing algorithm and transformed into a hash. We authorize the
+the hash for cryptographically prove usages and we guarantee the correctness of
+the hash produced. However we are not responsible to the correctness of the
+cryptographic proofs derived from the hash.
+
+* The resulting hash in bignumber format is:
+59804956490061966944605624366197118549841129766369488852863629470
+
+* The program used to generate the hash is:
+create-bank-balance-proof-request_v20181029_1.js
+
+Bank name: A Inc.
+Bank signature: _____
+-------------------------------------------------------------------------------

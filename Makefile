@@ -4,8 +4,8 @@ CASE=case1
 CIRCUIT_DIR=demos/$(CIRCUIT_NAME)
 CASE_DIR=$(CIRCUIT_DIR)/samples/$(CASE)
 
-CIRCOM=npx --node-arg "--max-old-space-size=12000" circom
-SNARKJS=npx --node-arg "--max-old-space-size=12000" snarkjs
+CIRCOM=time npx --node-arg "--max-old-space-size=12000" circom
+SNARKJS=time npx --node-arg "--max-old-space-size=12000" snarkjs
 
 
 all: $(CIRCUIT_DIR)/circuit.json $(CIRCUIT_DIR)/proving_key.json $(CIRCUIT_DIR)/verification_key.json $(CIRCUIT_DIR)/verifier.sol
@@ -27,14 +27,18 @@ clean:
 $(CASE_DIR)/witness.json: $(CIRCUIT_DIR)/circuit.json $(CASE_DIR)/input.json
 	$(SNARKJS) calculatewitness -c $(CIRCUIT_DIR)/circuit.json -i $(CASE_DIR)/input.json -w $@
 
+witness: $(CASE_DIR)/witness.json
+
 $(CASE_DIR)/public.json $(CASE_DIR)/proof.json: $(CIRCUIT_DIR)/proving_key.json $(CASE_DIR)/witness.json
 	$(SNARKJS) proof -w $(CASE_DIR)/witness.json --pk $(CIRCUIT_DIR)/proving_key.json -p $(CASE_DIR)/proof.json --pub $(CASE_DIR)/public.json
 
-test: $(CASE_DIR)/public.json $(CASE_DIR)/proof.json
-	cat $(CASE_DIR)/public.json;echo
+proof: $(CASE_DIR)/public.json $(CASE_DIR)/proof.json
+	echo public.json;cat $(CASE_DIR)/public.json;echo
+
+test: proof
 	$(SNARKJS) verify --vk $(CIRCUIT_DIR)/verification_key.json -p $(CASE_DIR)/proof.json --pub $(CASE_DIR)/public.json
 
-testbad: $(CASE_DIR)/public.bad.json $(CASE_DIR)/proof.json
-	$(SNARKJS) verify --vk $(CIRCUIT_DIR)/verification_key.json -p $(CASE_DIR)/proof.json --pub $(CASE_DIR)/public.bad.json;test $$? != 0
+testbad: proof
+	for i in $(CASE_DIR)/public.bad*.json;do echo Testing $$i;$(SNARKJS) verify --vk $(CIRCUIT_DIR)/verification_key.json -p $(CASE_DIR)/proof.json --pub $$i && exit 1;done;exit 0
 
-.PHONY: test testbad
+.PHONY: witness proof test testbad

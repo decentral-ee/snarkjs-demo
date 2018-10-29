@@ -4,7 +4,10 @@
   "description": "snarkjs demo circuits",
   "main": "index.js",
   "dependencies": {
+    "bignumber.js": "^7.2.1",
     "circom": "^0.0.19",
+    "crypto": "^1.0.1",
+    "readline-sync": "^1.4.9",
     "snarkjs": "^0.1.5"
   },
   "devDependencies": {},

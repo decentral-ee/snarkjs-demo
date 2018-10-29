@@ -1,4 +1,9 @@
 {
-    "balances": [5],
-    "minimalBalanceRequirement": 10
+    "salt": [
+        "92050659736024729629001109994870021018044126167886816943960120607"
+    ],
+    "balances": [
+        "156341"
+    ],
+    "minimalBalanceRequirement": "100000"
 }

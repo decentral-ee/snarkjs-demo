@@ -1,3 +1,3 @@
-include "../BankBalancesProver.circom"
+include "../BankBalancesProver/BankBalancesProver.circom"
 
 component main = BankBalancesProver(1);

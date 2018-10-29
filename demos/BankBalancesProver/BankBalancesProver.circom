@@ -1,8 +1,8 @@
-include "../node_modules/circom/circuits/comparators.circom";
-include "../node_modules/circom/circuits/sha256/sha256_2.circom";
+include "../../node_modules/circom/circuits/comparators.circom";
+include "../../node_modules/circom/circuits/sha256/sha256_2.circom";
 
 template BankBalancesProver(nBanks) {
-    signal private input salt;
+    signal private input salt[nBanks];
     signal private input balances[nBanks];
     signal input minimalBalanceRequirement;
     signal output out;
@@ -18,7 +18,7 @@ template BankBalancesProver(nBanks) {
     component lessthan = LessThan(32);
     var totalBalance = 0;
     for (i = 0; i < nBanks; ++i) {
-        sha256[i].a <-- salt;
+        sha256[i].a <-- salt[i];
         sha256[i].b <-- balances[i];
         expectedBalanceHashes[i] <== sha256[i].out;
         totalBalance += balances[i];
